@@ -25,10 +25,7 @@ function its(v, s)
 //it just draws thae grid   this needs to be changes yo
 function drawgrid()
 {
-	stroke(255);
-	strokeWeight(2);
-	line(0,-1*(height/2), 0, height/2);
-	line(-1*(width/2),0,  width/2,0);
+	stroke(130);
 	strokeWeight(0.6);
 	for (var i = -1*round((gheight/tilewidth)); i < round((gheight/tilewidth)); i++)
 	{
@@ -38,13 +35,35 @@ function drawgrid()
 	{
 		line(-1*(gwidth/2),i*tw,  gwidth/2,i*tw);
 	}
+
+
+	stroke(255);
+	strokeWeight(2);
+	line(0,-1*(height/2), 0, height/2);
+	line(-1*(width/2),0,  width/2,0);
 }
 
 
 //function function for user inputed lines
 function xx(x, v)
 {
-	return eval(v.replace("^", "**").replace("@", "^"));
+	var y = 1;
+	v = evalReady(v);
+	if (v.includes("x="))
+	{
+		return eval(v.replace("^", "**").replace("@", "^").replace("X", "x"));
+	}
+	else if (v.includes("y"))
+	{
+		console.log("y=" + (v.replace("^", "**").replace("@", "^").replace("X", "x")).split("=")[1]);
+		console.log("y=" + evalInverse((v.replace("^", "**").replace("@", "^").replace("X", "x")).split("=")[0]));
+
+		eval("y=" + (v.replace("^", "**").replace("@", "^").replace("X", "x")).split("=")[1]);
+		eval("y=" + evalInverse((v.replace("^", "**").replace("@", "^").replace("X", "x")).split("=")[0]));
+		return y;
+	}
+	else
+		return eval(v.replace("^", "**").replace("@", "^").replace("X", "x"));
 }
 
 
@@ -110,14 +129,29 @@ function updateLine(x, k)
 //inserts input and moves plus button down
 function addLine()
 {
+	colorPickers.push(createColorPicker("#ffff00"));
+	lineColors.push("#ffff00");
 	inputs.push(createInput());
-	inputs[inputs.length-1].position(0, 35*(inputs.length-1));
 	let z = inputs.length-1;
+
+	colorPickers[z].position(220, 35*(z));
+	colorPickers[z].input(() => {  changeLineColor(z);  });
+	
+	inputs[z].position(0, 35*(z));
 	inputs[inputs.length-1].input(() => {  editLine(z);  });
+
+
 	newinput.position(0, (35*(inputs.length-1)) + 35)
 	lines.push(new ddline());
 }
 
+
+function changeLineColor(k)
+{
+	console.log(colorPickers[k].value());
+	lineColors[k] = colorPickers[k].value();
+	redraw();
+}
 
 
 

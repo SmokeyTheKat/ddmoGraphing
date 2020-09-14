@@ -7,8 +7,10 @@ let tilewidth = 30;
 let tw = tilewidth;
 
 let lines = [];
+let lineColors = [];
 
 let inputs = [];
+let colorPickers = [];
 let newinput = null;
 
 let cam = new v2(0,0);
@@ -16,5 +18,5 @@ let zoom = 1;
 
 let clickPoint = null;
 
-var s = 2;
+var s = 20;
 var itrs = 50;

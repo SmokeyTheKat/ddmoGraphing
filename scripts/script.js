@@ -23,6 +23,7 @@ function draw()
 		point(clickPoint.x, clickPoint.y);
 	}
 
+
 //set (0,0) position at center of screen
 	translate(width/2, height/2);
 
@@ -52,7 +53,10 @@ function draw()
 
 //draw all lines
 	for (var i = 0; i < lines.length; i++)
+	{
+		stroke(color(lineColors[i]));
 		lines[i].show();
+	}
 
 
 	noLoop();
@@ -68,6 +72,8 @@ function mouseWheel(e)
 //only zoom if it will not go under zero
 	if ((zoom + d) > 0)
 		zoom += d;
+
+	clickPoint = null;
 	redraw();
 }
 
