@@ -43,12 +43,17 @@ class v2line
 	}
 	show()
 	{
+/*
 		push();
 		stroke(255);
 		if (!isFinite(this.x1) || !isFinite(this.x2) || !isFinite(this.y1) || !isFinite(this.y2))
 			circle(this.x1, this.y1, (1/s)*5);
 		pop();
 		line(this.x1, this.y1, this.x2, this.y2);
+*/
+		vertex(this.x1, this.y1);
+		vertex(this.x2, this.y2);
+
 	}
 }
 
@@ -66,10 +71,19 @@ class ddline
 //draws all the sub-lines to the screen
 	show()
 	{
-		for (var i = 0; i < this.lines.length; i++)
+		beginShape(LINES);
+		for (var i = -1*(itrs*s); i < itrs*s; i++)
 		{
-			this.lines[i].show();
+			var yy = v2ts(new v2(this.lines[i].x1,this.lines[i].y1));
+			if (-1*yy.x >= 0 && -1*yy.x <= width)
+			{
+				if (yy.y >= 0 && yy.y <= height)
+				{
+					this.lines[i].show();
+				}
+			}
 		}
+		endShape();
 	}
 
 //add sub-lines to the line array
