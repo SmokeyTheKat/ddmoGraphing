@@ -5,6 +5,11 @@ function v2ts(v)
 		      -1*((v.y - height/2)-cam.y)/tw/zoom   );
 	return o;
 }
+function vts(v)
+{
+	var o = ((v - width /2)-cam.x)/tw/zoom;
+	return o;
+}
 
 
 
@@ -27,14 +32,21 @@ function drawgrid()
 {
 	stroke(130);
 	strokeWeight(0.6);
+	beginShape(LINES);
 	for (var i = -1*round((gheight/tilewidth)); i < round((gheight/tilewidth)); i++)
 	{
-		line(i*tw,-1*(gheight/2), i*tw, gheight/2);
+		//line(i*tw,-1*(gheight/2), i*tw, gheight/2);
+		//vertex(i*tw,-1*(gheight/2), i*tw, gheight/2);
+		vertex(i*tw,-1*(gheight/2));
+		vertex(i*tw, gheight/2);
 	}
 	for (var i = -1*round((gwidth/tw)-46); i < round((gwidth/tw)-45); i++)
 	{
-		line(-1*(gwidth/2),i*tw,  gwidth/2,i*tw);
+		//line(-1*(gwidth/2),i*tw,  gwidth/2,i*tw);
+		vertex(-1*(gwidth/2),i*tw);
+		vertex(gwidth/2,i*tw);
 	}
+	endShape();
 
 
 	stroke(255);
@@ -48,7 +60,7 @@ function drawgrid()
 function xx(x, v)
 {
 	var y = 1;
-	v = evalReady(v);
+	//v = evalReady(v);
 	if (v.includes("x="))
 	{
 		return eval(v.replace("^", "**").replace("@", "^").replace("X", "x"));
@@ -63,7 +75,7 @@ function xx(x, v)
 		return y;
 	}
 	else
-		return eval(v.replace("^", "**").replace("@", "^").replace("X", "x"));
+		return eval(v/*.replace("^", "**").replace("@", "^").replace("X", "x")*/);
 }
 
 

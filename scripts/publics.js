@@ -18,5 +18,5 @@ let zoom = 1;
 
 let clickPoint = null;
 
-var s = 20;
-var itrs = 50;
+var s = 100;
+var itrs = 20;

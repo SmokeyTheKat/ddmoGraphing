@@ -72,16 +72,10 @@ class ddline
 	show()
 	{
 		beginShape(LINES);
-		for (var i = -1*(itrs*s); i < itrs*s; i++)
+		for (var i = 0; i < this.lines.length; i++)
 		{
-			var yy = v2ts(new v2(this.lines[i].x1,this.lines[i].y1));
-			if (-1*yy.x >= 0 && -1*yy.x <= width)
-			{
-				if (yy.y >= 0 && yy.y <= height)
-				{
-					this.lines[i].show();
-				}
-			}
+			//if (vts(this.lines[i].x) > 0 && vts(this.lines[i].x < width))
+				this.lines[i].show();
 		}
 		endShape();
 	}
